@@ -28,13 +28,14 @@ export default {
     },
     methods: {
         choose(id){
+            this.foundPlaces.length = 0
             this.$emit("id", id)
         },
         getCity() {
             if ((this.place.length >= 1 && !this.up) || (this.up && this.place.length === 0)) this.up = !this.up
             if (this.place.length >= 1 && this.place.length < 3) this.display = false
             else this.display = true
-            if (this.place.length >= 3) this.$emit("place", this.place)
+            this.$emit("place", this.place)
         }
     }
 }

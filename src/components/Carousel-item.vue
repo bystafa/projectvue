@@ -1,22 +1,73 @@
 <template>
     <div class="carouselItem">
-        <h3>00:00</h3>
-        <div class="icon sun-shower">
+        <h3>{{convertTimestamp(itemData.dt)}}</h3>
+        <h3>{{date}}</h3>
+        <div v-if="itemData.weather[0].main === 'Drizzle'" class="icon sun-shower">
             <div class="cloud"></div>
             <div class="sun">
                 <div class="rays"></div>
             </div>
             <div class="rain"></div>
         </div>
+
+        <div v-if="itemData.weather[0].main === 'Thunderstorm'" class="icon thunder-storm">
+            <div class="cloud"></div>
+            <div class="lightning">
+                <div class="bolt"></div>
+                <div class="bolt"></div>
+            </div>
+        </div>
+
+        <div v-if="itemData.weather[0].main === 'Clouds'" class="icon cloudy">
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+        </div>
+
+        <div v-if="itemData.weather[0].main === 'Snow'" class="icon flurries">
+            <div class="cloud"></div>
+            <div class="snow">
+                <div class="flake"></div>
+                <div class="flake"></div>
+            </div>
+        </div>
+
+        <div v-if="itemData.weather[0].main === 'Clear'" class="icon sunny">
+            <div class="sun">
+                <div class="rays"></div>
+            </div>
+        </div>
+
+        <div v-if="itemData.weather[0].main === 'Rain'" class="icon rainy">
+            <div class="cloud"></div>
+            <div class="rain"></div>
+        </div>
+        <h2>{{`${Math.floor(itemData.temp.day)} °C`}}</h2>
     </div>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            date: ''
+        }
+    },
     props: {
         itemData: {
             type: Object,
             default: () => {}
+        }
+    },
+    methods: {
+        convertTimestamp(timestamp) {
+            let d = new Date(timestamp * 1000),
+                yyyy = d.getFullYear(),
+                mm = ('0' + (d.getMonth())).slice(-2), 
+                dd = ('0' + d.getDate()).slice(-2),
+                time = new Date(yyyy,mm,dd);
+            this.date = `${dd}.${mm}`;
+            return this.days[time.getDay()]
         }
     }
 }
@@ -24,14 +75,19 @@ export default {
 
 <style lang="scss" scoped>
     .carouselItem {
-        margin: 0 30px;
         font-size: 12px;
-        h3 {
-            font-size: 16px;
+        h3, h2 {
             text-align: center;
             font-family: Verdana, Geneva, Tahoma, sans-serif; 
             color: #ffffff;
             margin: 0;
+        }
+        h2 {
+            font-size: 30px;
+            font-weight: 1;
+        }
+        h3 {
+            font-size: 16px;
         }
     }
     html { box-sizing: border-box; }
