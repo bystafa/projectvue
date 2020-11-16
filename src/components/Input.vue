@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="search">
-            <input type="search" v-model="place" placeholder="Введите город">
+            <input @keyup="getCity" type="search" v-model="place" placeholder="Введите город">
             <div :class="{up}" class="arrow"></div>
         </div>
         <div class="lst">
@@ -25,27 +25,16 @@ export default {
             up: false,
             display: true
         }
-    }, 
-    watch: {
-        place: function() {
-            if ((this.place.length >= 1 && !this.up) || (this.up && this.place.length === 0)){
-                this.up = !this.up
-            }
-            if (this.place.length >= 1 && this.place.length < 3) {
-                this.display = false
-            }
-            if (this.place.length == 0) {
-                this.display = true
-            }
-            if (this.place.length >= 3) {
-                this.display = true
-                this.$emit("place", this.place)
-            }
-        }
     },
     methods: {
         choose(id){
             this.$emit("id", id)
+        },
+        getCity() {
+            if ((this.place.length >= 1 && !this.up) || (this.up && this.place.length === 0)) this.up = !this.up
+            if (this.place.length >= 1 && this.place.length < 3) this.display = false
+            else this.display = true
+            if (this.place.length >= 3) this.$emit("place", this.place)
         }
     }
 }

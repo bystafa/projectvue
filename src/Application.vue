@@ -21,15 +21,18 @@ export default {
     },
     methods: {
         information(input__data) {
-            this.foundPlaces, this.coordinates = []
-            axios
-            .get(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=ba2ffe99-a90a-4c7e-893a-d14cbc5b3dc7&geocode=${input__data}`)
-            .then(response => (this.place = response.data.response.GeoObjectCollection.featureMember));
-            this.place.forEach(element => 
-            {
-                this.foundPlaces.push(`${element.GeoObject.name}, ${element.GeoObject.description}`)
-                this.coordinates.push(element.GeoObject.Point.pos.split(' '))
-            })
+            this.coordinates.length = 0
+            this.foundPlaces.length = 0
+            if (input__data.length >= 3) {
+                axios
+                .get(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=ba2ffe99-a90a-4c7e-893a-d14cbc5b3dc7&geocode=${input__data}`)
+                .then(response => (this.place = response.data.response.GeoObjectCollection.featureMember));
+                this.place.forEach(element => 
+                {
+                    this.foundPlaces.push(`${element.GeoObject.name}, ${element.GeoObject.description}`)
+                    this.coordinates.push(element.GeoObject.Point.pos.split(' '))
+                })
+            }
         },
         weather(id) {
             // axios
