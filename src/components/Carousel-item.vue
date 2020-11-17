@@ -75,7 +75,7 @@ export default {
 
 <style lang="scss" scoped>
     .carouselItem {
-        font-size: 12px;
+        margin: 0 5px;
         h3, h2 {
             text-align: center;
             font-family: Verdana, Geneva, Tahoma, sans-serif; 
@@ -90,6 +90,13 @@ export default {
             font-size: 16px;
         }
     }
+    @media screen and (max-width: 1200px){
+        .carouselItem {
+            font-size: 12px;
+            margin: 0 10px;
+        }
+    }
+
     html { box-sizing: border-box; }
     html *,
     html *:before,

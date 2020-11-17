@@ -47,6 +47,9 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+        padding: 200px 400px;
+    }
 h1 {
     font-weight: 1;
     text-align: center;
@@ -55,5 +58,20 @@ h1 {
 
 h4 {
     color: #ffffff;
+}
+@media screen and (max-width: 1670px){
+    body {
+        padding: 200px 300px;
+    }
+}
+@media screen and (max-width: 1480px){
+    body {
+        padding: 200px;
+    }
+}
+@media screen and (max-width: 1350px){
+    body {
+        padding: 200px 150px;
+    }
 }
 </style>

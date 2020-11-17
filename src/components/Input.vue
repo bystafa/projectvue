@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mainInput">
         <div class="search">
             <input @keyup="getCity" type="search" v-model="place" placeholder="Введите город">
             <div :class="{up}" class="arrow"></div>
@@ -28,6 +28,7 @@ export default {
     },
     methods: {
         choose(id){
+            this.up = false
             this.foundPlaces.length = 0
             this.$emit("id", id)
         },
@@ -42,15 +43,10 @@ export default {
 </script>
 
 <style lang="scss">
-    body {
-        padding: 200px 400px;
-    }
     input {
-        border: 1px solid black;
         padding: 20px 10px;
         height: 10px;
         width: 100%;
-        border-radius: 5px;
         position: relative;
         outline: none;
     }
@@ -79,7 +75,7 @@ export default {
         margin: 0;
         background: #ffffff;
         padding: 10px 10px;
-        border-radius: 5px;
+        cursor: pointer;
     }
     .display {
         display: none;
