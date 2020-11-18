@@ -3,6 +3,7 @@
         <h1>Погода</h1>
         <inputLine :foundPlaces="foundPlaces" @place="information" @id="weather_id"/>
         <carousel v-if="weather.length > 0" :dataCarousel="weather"/>
+        <button @click="$router.push('/err')">привет</button>
     </div>
 </template>
 

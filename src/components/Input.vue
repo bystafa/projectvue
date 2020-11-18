@@ -6,7 +6,11 @@
         </div>
         <div class="lst">
             <p :class="{display}">Введите минимум три символа, либо попробуйте изменить запрос</p>
-            <p v-for="(place, index) in foundPlaces" :key="index" @click="choose(index)">{{place}}</p>
+            <p v-for="(place, index) in foundPlaces" :key="index" @click="choose(index)">
+                <router-link :to="{path: `/${place}`}" class="router-link">
+                    {{place}}
+                </router-link>
+            </p>
         </div>
     </div>
 </template>
@@ -29,6 +33,7 @@ export default {
     methods: {
         choose(id){
             this.up = false
+            this.place = this.foundPlaces[id]
             this.foundPlaces.length = 0
             this.$emit("id", id)
         },
@@ -43,6 +48,10 @@ export default {
 </script>
 
 <style lang="scss">
+    .router-link {
+        color: #000000;
+        text-decoration: none;
+    }
     input {
         padding: 20px 10px;
         height: 10px;
