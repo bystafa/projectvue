@@ -19,16 +19,11 @@
 
 
 <script>
+const axios = require('axios')
 import carouselItem from '@/components/Carousel-item.vue'
 export default {
     components: {
         carouselItem
-    },
-    props: {
-        dataCarousel: {
-            type: Array,
-            default: () => []
-        }
     },
     methods: {
         prevSlide() {
@@ -45,9 +40,17 @@ export default {
     },
     data() {
         return {
+            dataCarousel: [],
             currentSlideIndex: 0,
-            lines: this.dataCarousel.length / 4
+            lines: 2
         }
+    },
+    created() {
+        this.dataCarousel.length = 0
+        console.log(this.$router.query)
+        // axios
+        // .get(`http://api.openweathermap.org/data/2.5/onecall?lat=${this.$router.query.lat}&lon=${this.$router.query.lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=868fe0c7e6c079dcb21957bd7909a29a`)
+        // .then(response => (response.data.daily.forEach(element => this.dataCarousel.push(element))));
     }
 }
 </script>

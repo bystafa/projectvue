@@ -5,14 +5,10 @@ import Err from '@/components/Err.vue'
 
 const routes = [
   {
-    path:"/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/:id",
+    path: "/weather",
     name: "Carousel",
-    component: Carousel
+    component: Carousel,
+    props: true
   },
   {
     path: "/err",

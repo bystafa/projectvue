@@ -7,9 +7,7 @@
         <div class="lst">
             <p :class="{display}">Введите минимум три символа, либо попробуйте изменить запрос</p>
             <p v-for="(place, index) in foundPlaces" :key="index" @click="choose(index)">
-                <router-link :to="{path: `/${place}`}" class="router-link">
-                    {{place}}
-                </router-link>
+                {{place}}
             </p>
         </div>
     </div>

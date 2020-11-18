@@ -2,8 +2,8 @@
     <div>
         <h1>Погода</h1>
         <inputLine :foundPlaces="foundPlaces" @place="information" @id="weather_id"/>
-        <carousel v-if="weather.length > 0" :dataCarousel="weather"/>
-        <button @click="$router.push('/err')">привет</button>
+        <!-- <carousel v-if="weather.length > 0" :dataCarousel="weather"/> -->
+        <router-view />
     </div>
 </template>
 
@@ -38,10 +38,14 @@ export default {
             }
         },
         weather_id(id) {
-            this.weather.length = 0
-            axios
-            .get(`http://api.openweathermap.org/data/2.5/onecall?lat=${this.coordinates[id][0]}&lon=${this.coordinates[id][1]}&units=metric&exclude=current,minutely,hourly,alerts&appid=868fe0c7e6c079dcb21957bd7909a29a`)
-            .then(response => (response.data.daily.forEach(element => this.weather.push(element))));
+            // this.weather.length = 0
+            // axios
+            // .get(`http://api.openweathermap.org/data/2.5/onecall?lat=${this.coordinates[id][0]}&lon=${this.coordinates[id][1]}&units=metric&exclude=current,minutely,hourly,alerts&appid=868fe0c7e6c079dcb21957bd7909a29a`)
+            // .then(response => (response.data.daily.forEach(element => this.weather.push(element))));
+            let lat= this.coordinates[id][0],
+                lon = this.coordinates[id][1]
+            this.$router.push({name:'Carousel', query: {lat: lat, lon: lon}}) 
+            console.log(this.$router.query)
         }
     }
 }
